@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: dev
+
+logging:
+  level:
+    org.springframework: ERROR
+    org.hibernate: ERROR
+  file: C:\Users\teobo_000\Documents\agenda\server.log
