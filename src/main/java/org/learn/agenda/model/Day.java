@@ -7,6 +7,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
@@ -33,5 +34,30 @@ public class Day {
     private LocalDate date;
 
     public Day() {
+        tasks = new ArrayList<>();
+        appointments = new ArrayList<>();
+    }
+
+    public Day(LocalDate date) {
+        this();
+        this.date = date;
+    }
+
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    public void addAppointment(Appointment appointment){
+        appointments.add(appointment);
+    }
+
+    @Override
+    public String toString() {
+        return "Day{" +
+                "id=" + id +
+                ", appointments=" + appointments +
+                ", tasks=" + tasks +
+                ", date=" + date +
+                '}';
     }
 }

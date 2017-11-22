@@ -11,4 +11,5 @@ import java.time.LocalDate;
 public interface DayRepository extends CrudRepository<Day, Long> {
 
     Day findByDate(LocalDate date);
+
 }
