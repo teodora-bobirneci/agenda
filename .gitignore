@@ -1,1 +1,5 @@
 .idea
+/target
+/target/classes
+/target/classes/org/learn/agenda/*.class
+/target/classes/org/learn/agenda/model/*.class

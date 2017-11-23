@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -30,6 +31,16 @@ public class DayController {
     @Autowired
     public DayController(DayService dayService) {this.dayService = dayService;}
 
+    @RequestMapping(value = "/week", method = GET)
+    public List<Day> getWeek() {
+        return dayService.getWeek(LocalDate.now());
+    }
+
+    @RequestMapping(value = "/week/{date}", method = GET)
+    public List<Day> getWeek(@PathVariable(name = "date", required = false) @DateTimeFormat(iso = ISO.DATE) LocalDate date) {
+        return dayService.getWeek(date);
+    }
+
     @RequestMapping(value = "/day/{date}", method = GET)
     public Day getDay(@PathVariable(name = "date") @DateTimeFormat(iso = ISO.DATE) LocalDate date) {
         return dayService.findByDate(date);
@@ -40,8 +51,7 @@ public class DayController {
                        @RequestParam String name,
                        @RequestParam(required = false) String description) {
         Day day = dayService.findByDate(date);
-        dayService.addTask(day, new Task().withDay(day).withName(name).withDescription(description));
-        return day;
+        return dayService.addTask(day, new Task().withDay(day).withName(name).withDescription(description));
     }
 
     @RequestMapping(value = "/day/{date}/addAppointment", method = POST)
@@ -50,9 +60,7 @@ public class DayController {
                               @RequestParam String name,
                               @RequestParam(required = false) String description) {
         Day day = dayService.findByDate(date);
-        dayService.addAppointment(day, new Appointment().withDay(day).withTime(time).withName(name).withDescription(description));
-        return day;
+        return dayService.addAppointment(day, new Appointment().withDay(day).withTime(time).withName(name).withDescription(description));
     }
-
 
 }
