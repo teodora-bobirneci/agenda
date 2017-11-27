@@ -2,7 +2,6 @@ package org.learn.agenda.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalTime;
@@ -12,7 +11,6 @@ import static javax.persistence.CascadeType.ALL;
 /**
  * @author Teodora Bobirneci
  */
-@Getter
 @Entity
 public class Appointment {
     @Id
@@ -47,6 +45,14 @@ public class Appointment {
     public Appointment withTime(LocalTime localTime) {
         this.localTime = localTime;
         return this;
+    }
+
+    public Day getDay() {
+        return day;
+    }
+
+    public void setDay(Day day) {
+        this.day = day;
     }
 
     @Override

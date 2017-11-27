@@ -2,6 +2,7 @@ package org.learn.agenda;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.learn.agenda.model.Account;
 import org.learn.agenda.model.Day;
 import org.learn.agenda.repository.DayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class DayRepositoryTest {
 
     @Test
     public void test(){
-        Day day = new Day(1L, new ArrayList<>(), new ArrayList<>(), LocalDate.of(2017, 1, 1));
+        Day day = new Day(1L, new ArrayList<>(), new ArrayList<>(), LocalDate.of(2017, 1, 1), new Account());
         dayRepository.save(day);
 
         assertNotNull( dayRepository.findByDate( LocalDate.of(2017, 1, 1)));

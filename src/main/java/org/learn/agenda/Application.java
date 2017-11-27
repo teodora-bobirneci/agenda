@@ -13,4 +13,9 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+//    @Bean
+//    CommandLineRunner init(final AccountService accountService) {
+//        return arg0 -> accountService.createAccount(new Account("teodora", "Happy123"));
+//    }
+
 }

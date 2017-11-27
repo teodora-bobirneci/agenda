@@ -1,9 +1,7 @@
 package org.learn.agenda.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,27 +9,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.REFRESH;
 import static javax.persistence.FetchType.EAGER;
+import static org.hibernate.annotations.FetchMode.SUBSELECT;
 
 /**
  * @author Teodora Bobirneci
  */
 @AllArgsConstructor
-@Getter
 @Entity
 public class Day {
 
     @Id
     @GeneratedValue
     private long id;
-    @OneToMany(fetch = EAGER,mappedBy="day",cascade = ALL)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(fetch = EAGER, mappedBy = "day", cascade = ALL)
+    @Fetch(value = SUBSELECT)
     private List<Appointment> appointments;
-    @OneToMany(fetch = EAGER,mappedBy="day",cascade = ALL)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(fetch = EAGER, mappedBy = "day", cascade = ALL)
+    @Fetch(value = SUBSELECT)
     private List<Task> tasks;
     @Column
     private LocalDate date;
+    @ManyToOne(cascade = REFRESH)
+    @JoinColumn(name = "USER_ID")
+    private Account account;
 
     public Day() {
         tasks = new ArrayList<>();
@@ -47,8 +49,12 @@ public class Day {
         tasks.add(task);
     }
 
-    public void addAppointment(Appointment appointment){
+    public void addAppointment(Appointment appointment) {
         appointments.add(appointment);
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
     @Override

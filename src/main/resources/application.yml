@@ -4,7 +4,7 @@ spring:
 
 logging:
   level:
-    org.springframework: ERROR
+    org.springframework: DEBUG
     org.hibernate: ERROR
     org.springframework.boot.autoconfigure.security: DEBUG
   file: C:\Users\teobo_000\Documents\agenda\server.log
